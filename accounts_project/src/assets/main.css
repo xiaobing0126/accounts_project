@@ -1,5 +1,31 @@
 @import './base.css';
 
+/* 响应式字体大小配置 */
+html {
+  font-size: 16px;
+}
+
+/* 小屏幕（< 576px） */
+@media (max-width: 576px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* 中屏幕（576px - 768px） */
+@media (min-width: 576px) and (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* 大屏幕（> 768px） */
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
