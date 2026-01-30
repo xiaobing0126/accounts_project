@@ -35,6 +35,15 @@ import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 import { loginApi } from '@/api/user/index'
+// 如果是导出类，就这么引入
+// import StorageUtil from '@/utils/storage'
+
+// 如果是导出单例，就这么引入
+// import storageUtil from '@/utils/storage'
+
+import storageUtil, { createStorage } from '@/utils/storage'
+// 创建自定义前缀的实例
+const userStorage = createStorage('user_')
 
 const { t, locale } = useI18n()
 const username = ref('')
@@ -48,9 +57,11 @@ const handleLogin = async () => {
     ElMessage.error(t('login.placeholder.username'))
   } else {
     try {
-      const response = await loginApi({ username: username.value, password: password.value })
-      console.log('output->response,', response)
+      const res = await loginApi({ username: username.value, password: password.value })
+      console.log('output->res,', res)
       ElMessage.success(`${t('login.button')} success`)
+
+      userStorage.setLocal('token', res.data.token)
 
       // 登陆成功跳转列表页面
       router.push({
@@ -63,15 +74,19 @@ const handleLogin = async () => {
   }
 }
 
+/**
+ * 切换语言
+ */
 const toggleLanguage = () => {
+  console.log('output->storageUtil.getLocal', storageUtil.getLocal('locale'))
   if (currentLocale.value === 'zh') {
     locale.value = 'en'
     currentLocale.value = 'en'
-    localStorage.setItem('locale', 'en')
+    storageUtil.setLocal('locale', 'en')
   } else {
     locale.value = 'zh'
     currentLocale.value = 'zh'
-    localStorage.setItem('locale', 'zh')
+    storageUtil.setLocal('locale', 'zh')
   }
 }
 </script>

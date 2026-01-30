@@ -6,6 +6,10 @@ import accountsRoutes from './accounts'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/',
+      redirect: '/user/login',
+    },
     // {
     //   path: '/',
     //   name: 'home',

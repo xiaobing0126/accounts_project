@@ -1,0 +1,20 @@
+{
+  "common": {
+    "login": "Login",
+    "logout": "Logout",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "login": {
+    "title": "Account Login",
+    "placeholder": {
+      "username": "Please enter username",
+      "password": "Please enter password"
+    },
+    "button": "Login",
+    "remember": "Remember password",
+    "forgot": "Forgot password?"
+  }
+}

@@ -1,6 +1,6 @@
 import { createI18n } from 'vue-i18n'
-import zh from './locales/zh'
-import en from './locales/en'
+import zh from './locales/zh.json'
+import en from './locales/en.json'
 
 type MessageSchema = typeof zh
 
@@ -15,7 +15,7 @@ const getSavedLocale = (): 'en' | 'zh' => {
   return browserLang.startsWith('en') ? 'en' : 'zh'
 }
 
-const i18n = createI18n<MessageSchema, 'en' | 'zh'>({
+const i18n = createI18n({
   legacy: false,
   locale: getSavedLocale(),
   fallbackLocale: 'en',

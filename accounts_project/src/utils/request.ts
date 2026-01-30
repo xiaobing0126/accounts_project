@@ -1,4 +1,7 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
+import { createStorage } from '@/utils/storage'
+// 创建自定义前缀的实例
+const userStorage = createStorage('user_')
 
 interface RequestConfig extends AxiosRequestConfig {
   showLoading?: boolean
@@ -26,9 +29,10 @@ class Request {
     this.instance.interceptors.request.use(
       (config) => {
         // 可以在这里添加 token
-        const token = localStorage.getItem('token')
+        const token = userStorage.getLocal<string>('token')
+        console.log('output->token', token)
         if (token) {
-          config.headers.Authorization = `Bearer ${token}`
+          config.headers['x-csrf-token'] = token
         }
         return config
       },
